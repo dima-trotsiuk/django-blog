@@ -20,8 +20,7 @@ class Post(models.Model):
 class Comment(models.Model):
     text = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, default=1, verbose_name='id поста')
-
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.pk} - {self.text}"

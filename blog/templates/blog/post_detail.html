@@ -23,5 +23,19 @@
         <a href="{% url 'post_delete' post_id=post.pk %}">Видалити</a>
     </div>
 
+    <h4>Коментарі</h4>
+    <div id="comments">
+    {% if not comments %}
+        <p>нема комантарів</p>
+    {% endif %}
+
+    {% for comment in comments %}
+        <div>
+            <p>{{comment.text}}</p>
+            <p>{{comment.publish_date}}</p>
+        </div>
+    {% endfor %}
+    </div>
+
 </div>
 {% endblock %}

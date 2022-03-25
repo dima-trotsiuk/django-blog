@@ -2,11 +2,9 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Post
+from .models import Post, Comment
 from .forms import PostForm
 
-
-# Create your views here.
 
 def post_list(request):
     posts = Post.objects.filter(published=True).all()
@@ -15,7 +13,10 @@ def post_list(request):
 
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    comments = Comment.objects.filter(post_id=post_id)
+    if not bool(comments):
+        comments = ''
+    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments})
 
 
 def post_new(request):

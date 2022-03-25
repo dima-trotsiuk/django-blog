@@ -10,8 +10,4 @@
     flex-flow: flex-direction;
 
 }
-#main > div:first-child > div{
-    border: 1px solid black;
-    width: 400px;
-    margin-bottom: 20px;
-}
+
