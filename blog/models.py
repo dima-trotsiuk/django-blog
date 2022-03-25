@@ -15,3 +15,14 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'post_id': self.pk})
+
+
+class Comment(models.Model):
+    text = models.TextField()
+    publish_date = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, default=1, verbose_name='id поста')
+
+
+    def __str__(self):
+        return f"{self.pk} - {self.text}"
+
