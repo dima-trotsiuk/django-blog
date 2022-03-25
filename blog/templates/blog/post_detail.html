@@ -23,7 +23,7 @@
         <a href="{% url 'post_delete' post_id=post.pk %}">Видалити</a>
     </div>
 
-    <h4>Коментарі</h4>
+    <h4>Коментарі ({{count_comments}})</h4>
     <div id="comments">
     {% if not comments %}
         <p>нема комантарів</p>

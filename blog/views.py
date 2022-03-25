@@ -13,10 +13,10 @@ def post_list(request):
 
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
-    comments = Comment.objects.filter(post_id=post_id)
-    if not bool(comments):
-        comments = ''
-    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments})
+    comments = Comment.objects.filter(post=post_id)
+    count_comments = comments.count()
+    return render(request, 'blog/post_detail.html',
+                  {'post': post, 'comments': comments, 'count_comments': count_comments})
 
 
 def post_new(request):

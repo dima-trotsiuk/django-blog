@@ -9,6 +9,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     publish_date = models.DateTimeField(auto_now_add=True)
     published = models.BooleanField(default=False)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return f"{self.pk} - {self.title}"
@@ -25,3 +26,9 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.pk} - {self.text}"
 
+
+class Category(models.Model):
+    title = models.CharField(max_length=60)
+
+    def __str__(self):
+        return f"{self.pk} - {self.title}"
