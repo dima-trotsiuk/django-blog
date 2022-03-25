@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+Новий пост
+{% endblock %}
+
+
+{% block content %}
+<div style="margin: 0 auto; width: 40%;">
+    <form action="" method="POST">{% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="submit">
+</form>
+</div>
+{% endblock %}

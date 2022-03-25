@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+
+{% block content %}
+<div style="margin: 0 auto; width: 40%;">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text|truncatechars:45 }}</p>
+    <p>{{ post.created_date }} - {{ post.author }}</p>
+    {% if post.published %}
+    <p>Опублікований</p>
+    {% else %}
+    <p>Не Опублікований</p>
+    {% endif %}
+    <hr>
+    <div id="edit_or_delete">
+        {% if not post.published %}
+        <a href="{% url 'post_to_publish' post_id=post.pk %}">Опублікувати</a>
+        {% endif %}
+        <a href="{% url 'post_edit' post_id=post.pk %}">Редагувати</a>
+        <a href="{% url 'post_delete' post_id=post.pk %}">Видалити</a>
+    </div>
+
+</div>
+{% endblock %}

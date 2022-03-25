@@ -1,0 +1,17 @@
+#main{
+    width: 90%;
+    margin: 0 auto;
+}
+#list_flex{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-flow: flex-direction;
+
+}
+#main > div:first-child > div{
+    border: 1px solid black;
+    width: 400px;
+    margin-bottom: 20px;
+}

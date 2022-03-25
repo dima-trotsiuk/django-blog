@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/post_list.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/post_detail.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+<h1 style="text-align:center; margin-bottom:50px;"><a href="/">Dima production</a></h1>
+{% include 'inc/_menu.html '%}
+<div id="main">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

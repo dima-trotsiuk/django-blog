@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}
+Головна
+{% endblock %}
+
+
+{% block content %}
+<div id="list_flex">
+    {% for el in posts %}
+    <div>
+        <h1><a href="{{ el.get_absolute_url }}">{{ el.title }}</a></h1>
+        <p>{{ el.text|truncatechars:45 }}</p>
+        <p>{{ el.created_date }} - {{ el.author }}</p>
+    </div>
+    {% endfor %}
+</div>
+<div>
+    <a href="{% url 'post_draft' %}">Чорновик</a>
+</div>
+{% endblock %}

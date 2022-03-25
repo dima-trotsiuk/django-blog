@@ -1,0 +1,3 @@
+#edit_or_delete > a:nth-child(2){
+    float: right;
+}
