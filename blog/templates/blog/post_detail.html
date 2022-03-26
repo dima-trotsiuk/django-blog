@@ -14,6 +14,7 @@
     {% else %}
     <p>Не Опублікований</p>
     {% endif %}
+    <p>Категорія - <a href="{% url 'posts_by_category' category_id=post.category.id %}">{{post.category.title}}</a></p>
     <hr>
     <div id="edit_or_delete">
         {% if not post.published %}

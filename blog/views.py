@@ -2,13 +2,14 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import PostForm
 
 
 def post_list(request):
-    posts = Post.objects.filter(published=True).all()
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    posts = Post.objects.filter().all()
+    categories = Category.objects.all()
+    return render(request, 'blog/post_list.html', {'posts': posts, 'categories': categories})
 
 
 def post_detail(request, post_id):
@@ -49,17 +50,27 @@ def post_edit(request, post_id):
 
 
 def post_delete(request, post_id):
-    post = get_object_or_404(Post, pk=post_id).delete()
+    get_object_or_404(Post, pk=post_id).delete()
     return redirect('post_list')
 
 
 def post_draft(request):
     posts_draft = Post.objects.filter(published=False).all()
-    return render(request, 'blog/post_list.html', {'posts': posts_draft})
+    categories = Category.objects.all()
+
+    return render(request, 'blog/post_list.html', {'posts': posts_draft, 'categories': categories})
 
 
 def post_to_publish(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     post.published = True
     post.save()
-    return render(request, 'blog/post_detail.html', {'post': post})
+    comments = Comment.objects.filter(post=post_id)
+    count_comments = comments.count()
+    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments, 'count_comments': count_comments})
+
+
+def posts_by_category(request, category_id):
+    posts = Post.objects.filter(category_id=category_id).all()
+    categories = Category.objects.all()
+    return render(request, 'blog/post_list.html', {'posts': posts, 'categories': categories})
