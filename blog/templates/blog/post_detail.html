@@ -30,9 +30,17 @@
         <p>нема комантарів</p>
     {% endif %}
 
-    {% for comment in comments %}
+    <div style="margin: 0 auto; width: 40%;">
+        <h3>Додайте коментар</h3>
+        <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="submit">
+        </form>
+    </div>
+        {% for comment in comments %}
         <div>
-            <p>{{comment.text}}</p>
+            <p>{{comment.text}} - {{comment.author}}</p>
             <p>{{comment.publish_date}}</p>
         </div>
     {% endfor %}
