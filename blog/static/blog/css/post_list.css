@@ -1,13 +1,35 @@
-#main{
-    width: 90%;
-    margin: 0 auto;
-}
 #list_flex{
     display: flex;
-    text-align: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    flex-flow: flex-direction;
+    flex-direction: column;
 
 }
+#list_flex > div:first-child{
+    text-align: center;
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    flex-direction: row;
 
+}
+#list_flex > div:first-child > div{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+#content_post{
+    width: 400px;
+}
+
+#content_post > h2 > a{
+    Color: #FF8000;
+    text-decoration: none;
+}
+#list_flex > div:nth-child(2){
+    margin-top: 30px;
+}
+#list_flex > div:nth-child(2) > a{
+    Color: black;
+    text-decoration: none;
+    font-size: 30px;
+
+}

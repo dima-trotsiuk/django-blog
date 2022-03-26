@@ -7,15 +7,22 @@
 {% block content %}
 {% include 'inc/_sidebar.html '%}
 <div id="list_flex">
-    {% for el in posts %}
+
     <div>
-        <h1><a href="{{ el.get_absolute_url }}">{{ el.title }}</a></h1>
-        <p>{{ el.text|truncatechars:45 }}</p>
-        <p>{{ el.created_date }} - {{ el.author }}</p>
+        {% for el in posts %}
+        <div id="content_post">
+            <h2><a href="{{ el.get_absolute_url }}">{{ el.title }}</a></h2>
+            <p>{{ el.text|truncatechars:200 }}</p>
+            <p>Дата - {{ el.created_date|date:"d.m.y g:m" }}</p>
+            <p>Автор - {{ el.author }}</p>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+
+    <div>
+        <a href="{% url 'post_draft' %}">Чорновик</a>
+    </div>
+
 </div>
-<div>
-    <a href="{% url 'post_draft' %}">Чорновик</a>
-</div>
+
 {% endblock %}

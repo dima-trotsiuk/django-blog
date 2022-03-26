@@ -1,0 +1,19 @@
+#category_list{
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+
+
+}
+#category_list > h1{
+    font-size: 30px;
+}
+#category_list > a{
+    color: black;
+    font-size: 25px;
+    margin-bottom: 15px;
+    text-decoration: none;
+}
+#category_list > a:hover{
+    color: #FF8000;
+}

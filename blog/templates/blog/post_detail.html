@@ -5,9 +5,9 @@
 
 
 {% block content %}
-<div style="margin: 0 auto; width: 40%;">
+<div id="post_detail_main">
     <h1>{{ post.title }}</h1>
-    <p>{{ post.text|truncatechars:45 }}</p>
+    <p>{{ post.text}}</p>
     <p>{{ post.created_date }} - {{ post.author }}</p>
     {% if post.published %}
     <p>Опублікований</p>
@@ -30,7 +30,7 @@
         <p>нема комантарів</p>
     {% endif %}
 
-    <div style="margin: 0 auto; width: 40%;">
+    <div>
         <h3>Додайте коментар</h3>
         <form action="" method="POST">
         {% csrf_token %}
@@ -41,7 +41,7 @@
         {% for comment in comments %}
         <div>
             <p>{{comment.text}} - {{comment.author}}</p>
-            <p>{{comment.publish_date}}</p>
+            <p>{{comment.publish_date|date:"d.m.y g:m"}}</p>
         </div>
     {% endfor %}
     </div>

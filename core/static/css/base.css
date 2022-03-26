@@ -1,0 +1,18 @@
+#main_text{
+    text-align: center;
+
+
+}
+#main_text > a{
+    text-decoration: none;
+    Color: black;
+    font-style: italic;
+    font-size: 45px;
+    color: #FF8000;
+}
+#main{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+
+}
