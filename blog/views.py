@@ -1,8 +1,10 @@
 from datetime import datetime
 
+import posts as posts
+from django.db.models import Avg
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Post, Comment, Category
+from .models import Post, Comment, Category, Feedback
 from .forms import PostForm, CommentForm
 
 
@@ -16,6 +18,8 @@ def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = Comment.objects.filter(post=post_id)
     count_comments = comments.count()
+    fb_avg = feedback_avg(post_id)
+
     if request.method == 'GET':
         form = CommentForm()
     else:
@@ -27,7 +31,8 @@ def post_detail(request, post_id):
             comment_form.save()
             return redirect('post_detail', post_id=post.pk)
     return render(request, 'blog/post_detail.html',
-                  {'post': post, 'comments': comments, 'count_comments': count_comments, 'form': form})
+                  {'post': post, 'comments': comments, 'count_comments': count_comments, 'form': form,
+                   'fb_avg': fb_avg})
 
 
 def post_new(request):
@@ -82,3 +87,25 @@ def posts_by_category(request, category_id):
     posts = Post.objects.filter(category_id=category_id).all()
     categories = Category.objects.all()
     return render(request, 'blog/post_list.html', {'posts': posts, 'categories': categories})
+
+
+def post_feedback(request, post_id):
+    fb_list = Feedback.objects.filter(post=post_id).all()
+    return render(request, 'blog/post_feedback.html', {'fb_list': fb_list})
+
+
+def feedback_avg(post_id):
+    return round(Feedback.objects.filter(post=post_id).aggregate(avg=Avg('rating'))['avg'], 1)
+
+
+def posts_top_5(request):
+    posts = Post.objects.all()
+    rating = {}
+
+    for post in posts:
+        rating[post.pk] = feedback_avg(post.pk)
+    i = sorted(rating, key=rating.get)[::-1][:5]
+    posts = Post.objects.filter(pk__in=i)
+
+    return render(request, 'blog/top_5.html', {'posts': posts})
+

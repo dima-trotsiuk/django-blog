@@ -7,6 +7,7 @@
 {% block content %}
 <div id="post_detail_main">
     <h1>{{ post.title }}</h1>
+    <p>Рейтинг {{fb_avg}}</p>
     <p>{{ post.text}}</p>
     <p>{{ post.created_date }} - {{ post.author }}</p>
     {% if post.published %}
@@ -21,6 +22,7 @@
         <a href="{% url 'post_to_publish' post_id=post.pk %}">Опублікувати</a>
         {% endif %}
         <a href="{% url 'post_edit' post_id=post.pk %}">Редагувати</a>
+        <a href="{% url 'post_feedback' post_id=post.pk %}">Відгуки</a>
         <a href="{% url 'post_delete' post_id=post.pk %}">Видалити</a>
     </div>
 

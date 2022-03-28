@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}
+Відгуки
+{% endblock %}
+
+
+{% block content %}
+{% if not fb_list %}
+<p>НЕМА ВІДГУКІВ</p>
+{% else %}
+{% for feedback in fb_list %}
+<div>
+    <p>{{ feedback.author }}</p>
+    <p>{{ feedback.text }}</p>
+    <p>{{ feedback.rating }}</p>
+    <p>{{ feedback.date|date:"d.m.y g:m" }}</p>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
